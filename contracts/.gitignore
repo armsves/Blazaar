@@ -1,0 +1,14 @@
+.env
+artifacts
+.next
+cache
+dist
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-lock.yaml
+package-lock.json
+lerna-debug.log
+.vscode
+.idea
+.DS_Store

@@ -1,0 +1,46 @@
+{
+  "name": "blazaar",
+  "version": "1.0.0",
+  "description": "An NFT, token launchpad, and marketplace project.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "hardhat test"
+  },
+  "dependencies": {
+    "@rainbow-me/rainbowkit": "latest",
+    "@tailwindcss/postcss": "^4.1.11",
+    "ethers": "latest",
+    "formidable": "^3.5.4",
+    "ipfs-http-client": "^60.0.1",
+    "next": "latest",
+    "pify": "^4.0.1",
+    "react": "latest",
+    "react-dom": "latest",
+    "wagmi": "latest",
+    "web3": "latest"
+  },
+  "devDependencies": {
+    "@types/formidable": "^3.4.5",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "^10.4.21",
+    "hardhat": "latest",
+    "postcss": "^8.5.6",
+    "tailwindcss": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  },
+  "keywords": [
+    "NFT",
+    "token",
+    "launchpad",
+    "marketplace",
+    "staking"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
