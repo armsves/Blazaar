@@ -9,12 +9,20 @@ contract NFTFactory {
 
     function createMarketplaceNFT() external returns (address) {
         MarketplaceNFT newNFT = new MarketplaceNFT();
+        
+        // Transfer ownership to the caller
+        newNFT.transferOwnership(msg.sender);
+        
         emit NFTCreated(address(newNFT), "MarketplaceNFT", "MNFT", msg.sender);
         return address(newNFT);
     }
 
     function createSoulboundNFT(string memory name, string memory symbol) external returns (address) {
         SoulboundNFT newSoulboundNFT = new SoulboundNFT(name, symbol);
+        
+        // Transfer ownership to the caller
+        newSoulboundNFT.transferOwnership(msg.sender);
+        
         emit NFTCreated(address(newSoulboundNFT), name, symbol, msg.sender);
         return address(newSoulboundNFT);
     }

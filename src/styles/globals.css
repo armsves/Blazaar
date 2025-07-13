@@ -4,7 +4,6 @@ body {
   font-family: 'Inter', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f9fafb; /* Light background */
   color: #333; /* Default text color */
   line-height: 1.6;
 }
@@ -26,7 +25,6 @@ footer a {
 h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #111; /* Darker heading color */
 }
 
 .container {

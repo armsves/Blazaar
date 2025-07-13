@@ -9,8 +9,12 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between w-full">
           {/* Logo */}
           <div className="flex-shrink-0 mr-8">
-            <Link href="/" className="text-3xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent hover:scale-105 transition-transform">
-              Blazaar
+            <Link href="/" className="hover:scale-105 transition-transform block">
+              <img 
+                src="/blazaar-logo.png" 
+                alt="Blazaar" 
+                className="h-10 w-auto rounded-lg"
+              />
             </Link>
           </div>
 
@@ -28,9 +32,6 @@ const Header: React.FC = () => {
               </Link>
               <Link href="/staking" className="hover:text-purple-300 transition-colors font-medium">
                 Staking
-              </Link>
-              <Link href="/factory" className="hover:text-purple-300 transition-colors font-medium">
-                Factory
               </Link>
             </div>
           </nav>

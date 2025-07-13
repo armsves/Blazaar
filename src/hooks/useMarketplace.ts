@@ -20,6 +20,7 @@ export const useMarketplace = () => {
         
         const nftData = await marketplaceContract.getAllNFTs();
         setNfts(nftData);
+        console.log('Fetched NFTs:', nftData);
       } catch (err) {
         setError((err as Error).message);
       } finally {

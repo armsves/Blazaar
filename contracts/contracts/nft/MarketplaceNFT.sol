@@ -13,12 +13,12 @@ contract MarketplaceNFT is ERC721, Ownable {
 
     constructor() ERC721("MarketplaceNFT", "MNFT") Ownable(msg.sender) {}
 
-    function mint(string memory _tokenURI) external onlyOwner {
+    function mint(address to, string memory _tokenURI) external onlyOwner {
         uint256 tokenId = nextTokenId;
-        nextTokenId++;
-        _mint(msg.sender, tokenId);
+        nextTokenId++;  
+        _mint(to, tokenId);
         _setTokenURI(tokenId, _tokenURI);
-        emit Minted(tokenId, msg.sender, _tokenURI);
+        emit Minted(tokenId, to, _tokenURI);
     }
 
     function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal {
@@ -34,5 +34,10 @@ contract MarketplaceNFT is ERC721, Ownable {
         require(ownerOf(tokenId) == from, "Not the owner");
         require(to != address(0), "Invalid address");
         super.transferFrom(from, to, tokenId);
+    }
+
+    // Make sure transferOwnership is available (inherited from Ownable)
+    function transferOwnership(address newOwner) public override onlyOwner {
+        super.transferOwnership(newOwner);
     }
 }

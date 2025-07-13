@@ -9,7 +9,11 @@ async function main() {
     // Deploy Marketplace contract
     console.log("Deploying Marketplace...");
     const Marketplace = await ethers.getContractFactory("Marketplace");
-    const marketplace = await Marketplace.deploy();
+    const marketplace = await Marketplace.deploy({
+        maxFeePerGas: ethers.parseUnits("2501", "gwei"), // 2501 gwei
+        maxPriorityFeePerGas: ethers.parseUnits("1", "gwei"), // 1 gwei
+        gasLimit: 5000000
+    });
     await marketplace.waitForDeployment();
     const marketplaceAddress = await marketplace.getAddress();
     console.log("Marketplace deployed to:", marketplaceAddress);

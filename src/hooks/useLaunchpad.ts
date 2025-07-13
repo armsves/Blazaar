@@ -29,30 +29,27 @@ export const useLaunchpad = () => {
   useEffect(() => {
     const fetchContracts = async () => {
       try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
+        const provider = new ethers.JsonRpcProvider('https://spicy-rpc.chiliz.com');
 
-        // Use the actual contract addresses from your JSON file
-        const tokenFactory = getTokenFactoryContract(contractAddresses.TokenFactory, signer);
-        const nftFactory = getNFTFactoryContract(contractAddresses.NFTFactory, signer);
-        const stakingPool = getStakingPoolContract(contractAddresses.StakingPool, signer);
+        const tokenFactory = getTokenFactoryContract(contractAddresses.TokenFactory, provider);
+        const nftFactory = getNFTFactoryContract(contractAddresses.NFTFactory, provider);
 
-        // Fetch deployed contract addresses
-        const tokenFactoryAddress = await tokenFactory.getTokenAddress();
-        const nftFactoryAddress = await nftFactory.getNFTAddress();
-        const stakingPoolAddress = await stakingPool.getStakingAddress();
-
-        setTokenAddress(tokenFactoryAddress);
-        setNftAddress(nftFactoryAddress);
-        setStakingAddress(stakingPoolAddress);
-
-        // For now, set empty arrays - you'll need to implement these methods in your smart contracts
-        // Example of what the contract calls might look like:
-        // const deployedTokens = await tokenFactory.getDeployedTokens();
-        // const deployedNFTs = await nftFactory.getDeployedNFTs();
+        // Fetch NFTs created by querying events
+        const nftFilter = nftFactory.filters.NFTCreated();
+        const nftEvents = await nftFactory.queryFilter(nftFilter);
         
-        setTokens([]); // Start with empty array
-        setNfts([]);   // Start with empty array
+        // Filter for EventLog instances and map them
+        const deployedNFTs: NFT[] = nftEvents
+          .filter((event): event is ethers.EventLog => event instanceof ethers.EventLog)
+          .map((event, index) => ({
+            id: index.toString(),
+            name: event.args.name,
+            symbol: event.args.symbol,
+            address: event.args.nftAddress
+          }));
+
+        setNfts(deployedNFTs);
+        setTokens([]);
 
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';
